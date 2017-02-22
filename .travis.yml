@@ -26,7 +26,8 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ninja -j1; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv knossos.app KNOSSOS.app; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then /usr/local/Cellar/qt5/${OSXQT}/bin/macdeployqt KNOSSOS.app; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cp KNOSSOS.app ../..; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then zip -r KNOSSOS.app.zip KNOSSOS.app; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cp KNOSSOS.app.zip ../..; fi
   
 after_success:
   # CREATE GIT TAG
@@ -42,7 +43,7 @@ deploy:
   provider: releases
   api_key:
     secure: ihSMf+ByA6KzXv/7hQhVMwH6lwZLG1zq4kaSkqF4dypULBzYc4dLLAId+bhBU0r0wQsdP0GeLnLmQS+je4k2yKVvydA3aWtX3lB+4dacCYtZIceK+7/hwuz9d+TSA/qtptjqcckRptFyOzp8Pf00YaY1bmkS9wPoFRZUrxHqlLK7L2PeLI3YIdc0DXbW6BqRo1RNPuE4o4S17t+eKJ/v0T/teQ/Ewpi9DfE20xGyNIFLwpDPP2bhn0gqxCO28Vc3oPT5k/SSoD1zBV6HE8tFdOOjNhx/dz/GM82OiBi1KlaiUnADMct8rbXg34QANLB8C2d2beQnX/qzH8w7m/UoGI5g52iGw6VOdxcuaeN7z3NSjvvJ4DjUm51H5FdV7S0jFg+GM8sM/1mZZPF92egg0z8GmkFdceu16C+ILJu1mHt7RUK0qbZaQ2TI/E+Gy7TB1j800fBULhn2BtzSBFPsr2icEeOOpAyqbZlWdpvnFrmqxyFr6OBI9q18ULr+8Xlx40O0Hlns0trHyU+4TutpdyhHbc1rzE0w2LL+/P3F14b8D1z0PK8bJ2O4XdEwLPo21tnmzmy580G7aqt1UfcJ5fpPriz8FENdIY/uP6IKfv3B0C+2AE7X5euli12xtzHUNqDSR/ZNQi+bjm151FKVK+YVvCsk2t5cFm1d8dkzet8=
-  file: KNOSSOS.app
+  file: KNOSSOS.app.zip
   skip_cleanup: true
   on:
     tags: true
