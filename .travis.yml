@@ -1,3 +1,46 @@
-env:
-  global:
+language: cpp
+
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode7.3
+git:
+  submodules: false
+
+before_install:
+  #OSX
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install qt5 snappy quazip ninja; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export CXXFLAGS="-I/usr/local/opt/qt5/include"; fi #qt5.8.0 is keg-only
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then OSXQT=`ls /usr/local/Cellar/qt5/`; fi #find current version (dir) of installed qt
+  
+before_script:
+  #OSX
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget https://github.com/al3xst/PythonQt/releases/download/nightly-mac/pythonqt.tar.gz; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then tar -xvf pythonqt.tar.gz; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mkdir knossos_build && cd knossos_build; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cmake -G Ninja -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_PREFIX_PATH="/Users/travis/build/knossos-project/knossos/pythonqt/lib/cmake/;/usr/local/Cellar/qt5/${OSXQT}/lib/cmake/;/usr/local/opt/qt5/lib/" ..; fi
+ 
+script:
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ninja -j1; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv knossos.app KNOSSOS.app; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then /usr/local/Cellar/qt5/${OSXQT}/bin/macdeployqt KNOSSOS.app; fi
+  
+after_success:
+  # CREATE GIT TAG
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - export GIT_TAG=build-$TRAVIS_BRANCH-$(date -u "+%Y-%m-%d")-$TRAVIS_BUILD_NUMBER
+  - echo -n $GIT_TAG > public/version
+  - git commit -m "Set build VERSION number" public/version
+  - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
+  - git push --quiet https://$GH_TOKEN@github.com/knossos/knossos-nightly $GIT_TAG > /dev/null 2>&1
+
+deploy:
+  provider: releases
+  api_key:
     secure: ihSMf+ByA6KzXv/7hQhVMwH6lwZLG1zq4kaSkqF4dypULBzYc4dLLAId+bhBU0r0wQsdP0GeLnLmQS+je4k2yKVvydA3aWtX3lB+4dacCYtZIceK+7/hwuz9d+TSA/qtptjqcckRptFyOzp8Pf00YaY1bmkS9wPoFRZUrxHqlLK7L2PeLI3YIdc0DXbW6BqRo1RNPuE4o4S17t+eKJ/v0T/teQ/Ewpi9DfE20xGyNIFLwpDPP2bhn0gqxCO28Vc3oPT5k/SSoD1zBV6HE8tFdOOjNhx/dz/GM82OiBi1KlaiUnADMct8rbXg34QANLB8C2d2beQnX/qzH8w7m/UoGI5g52iGw6VOdxcuaeN7z3NSjvvJ4DjUm51H5FdV7S0jFg+GM8sM/1mZZPF92egg0z8GmkFdceu16C+ILJu1mHt7RUK0qbZaQ2TI/E+Gy7TB1j800fBULhn2BtzSBFPsr2icEeOOpAyqbZlWdpvnFrmqxyFr6OBI9q18ULr+8Xlx40O0Hlns0trHyU+4TutpdyhHbc1rzE0w2LL+/P3F14b8D1z0PK8bJ2O4XdEwLPo21tnmzmy580G7aqt1UfcJ5fpPriz8FENdIY/uP6IKfv3B0C+2AE7X5euli12xtzHUNqDSR/ZNQi+bjm151FKVK+YVvCsk2t5cFm1d8dkzet8=
+  file: knossos_build/KNOSSOS.app
+  skip_cleanup: true
+  on:
+    tags: true
