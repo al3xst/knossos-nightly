@@ -17,3 +17,5 @@ deploy:
   overwrite: true
   on:
     repo: al3xst/knossos-nightly
+    tags: true
+    all_branches: true
