@@ -7,17 +7,10 @@ git:
 before_install: 
 before_script: 
 script:
-  #- if [ "$TRAVIS_OS_NAME" == "osx" ]; then ninja -j1; fi
-  #- if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv knossos.app KNOSSOS.app; fi
-  #- if [ "$TRAVIS_OS_NAME" == "osx" ]; then /usr/local/Cellar/qt5/${OSXQT}/bin/macdeployqt KNOSSOS.app; fi
-  #- if [ "$TRAVIS_OS_NAME" == "osx" ]; then zip -r KNOSSOS.app.zip KNOSSOS.app; fi
-  #- if [ "$TRAVIS_OS_NAME" == "osx" ]; then cp KNOSSOS.app.zip ../..; fi
-  ## TEST
-  - zip -r KNOSSOS.app.zip version
-
+- zip -r KNOSSOS.app.zip version
 deploy:
   provider: releases
   file: KNOSSOS.app.zip
 env:
   global:
-    secure: a6Laxv9zjCIi2l+2/21wh2eXmd+I9fOLLSd/DbVYCKBMMZWolPlHsYqASG5oGAEr4X5OEgtoMsXRy9g3mb9qhpgGmRqcrAl+iyY4AsBpVftVSlzBvpzbfyjtT8WpoBy2IIzG0dCamaDo9nfn0W49S/YUi1g21UyKnZue0JqAC28ysJaNXywjz+LtToA8L/Ya0ej5R7bCPewOw2GmHocWJfJWl/9+I8OzxV7QgmFSYiRbw0NoHJu7nVm8eAfuBNXpH7iqvx7y4Gyz5NZ4tud2WXmidPaJMmqu0hgr+BlIO7G/spdVkXarBxml9bUBMsG20p8Bq3+EAx+88bYVW4lFc41hvkbZ6HwrC8SxINK5p7/gZt33YpfrGrRiudQ+zFvZrvsU6rYlHnC5ramePi1UBBWsXyKwkHhWFJ1mpbXU4y6kfCwsDTaFA0OsPcFWzYwKXM3gGqCW5zNIBx9bWXN3AX6EEAxsu6HTFEUmzp2wECiYhPO8q7a6UmmH2syVKbx+1RSzxvGSUFibfo6FE8jK7wg+PKtdm2/FSGlgCy7Efcb/dDKR3hrhE9b6TCgmAj9Qrfwo5SqaseLaFpGHIyR4Q6T18AQv1L6oAcJiAF2mLoAdj5ytXTBMTRC3AS477pu4isUZbm03VBBuLQmGjisJooAuWSQk8DUPMakIO4BJYo8=
+    secure: MvFQcPpDUMhA3DXB9g+Wz8WKskddOmW2LHu5oAdoUUjehaCqGM0Qvr0mmtQ1MtALjDKY2Un4IHa4RwX/HQTzG/kQ745HZYaS9b64l+g29rYmd84US7VI8gIDHT+SXZ/BjvEclVsOvUZsXdd7a4KxHqVVb08Awstg2uV02N9561Atdm8kQKW9q/2nMhtdNiRvUhi6LdockE0Y3ElwV7ft4cSgeIcI9i3BHsBZ47psyn/8NPGOtEfe2MHoFx8Tpk7X8cc83pmz0xTHmcrk8Wffx13WvY5SKDmvV4SmTdsZB1Z2n0pXQf1cVVsqGTOdPvqnvPLODxFSh8oO7nqGeyTtwYzhQxnoYtvkhRzpIliUGWZJ2cyqmnM5k1zed0DAP52V4Ejpnrxkh2Ytqm76qvBntwQowJUjrA8NVqo/YeGQFz92R3gNqeZCNGweBhDlo7fnOcEOX8HA1HIueO7/VyMHk/M1FLdorWuFBAU0fXPVBqChwVj+JyYafSyI6ScuinCTCV7+UgpJV+ihRa88Zjzdo7LTwgbvbbqFp5WTZeKOu4CA2q3BD6a/poXHDsDO6E8rExqG53d8ckaDq6WGpL6Cth7lpW9VbqbVC218Hv00ugYbPA5fzaG5MzjxeFy/oqNxnhdFrF3bQteyGncTEZMvT1LN1vBoSxytcZmUXSSWXiQ=
