@@ -5,9 +5,9 @@ env:
 language: cpp
 matrix:
   include:
-  - os: linux
-  #- os: osx
-  #  osx_image: xcode7.3
+  #- os: linux
+  - os: osx
+    osx_image: xcode7.3
 git:
   submodules: false
 
