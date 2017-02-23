@@ -31,7 +31,9 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv knossos.app KNOSSOS.app; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then /usr/local/Cellar/qt5/${OSXQT}/bin/macdeployqt KNOSSOS.app; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then zip -r KNOSSOS.app.zip KNOSSOS.app; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ls -al .; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cp KNOSSOS.app.zip ../..; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ls -al ../..; fi
 
 deploy:
   provider: releases
