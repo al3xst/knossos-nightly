@@ -4,10 +4,15 @@ matrix:
   - os: linux
 git:
   submodules: false
+
 before_install: 
+
 before_script: 
+
 script:
 - zip -r KNOSSOS.app.zip version
+- python setup.py test
+
 deploy:
   provider: releases
   api_key:
