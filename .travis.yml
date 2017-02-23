@@ -11,7 +11,6 @@ before_script:
 
 script:
 - zip -r KNOSSOS.app.zip version
-- python setup.py test
 
 deploy:
   provider: releases
@@ -22,5 +21,4 @@ deploy:
   overwrite: true
   on:
     repo: al3xst/knossos-nightly
-    tags: true
     all_branches: true
