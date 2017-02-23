@@ -41,7 +41,6 @@ deploy:
     secure: 35guXMCYs1UKXHNia+0aLITTDdCtXjclYYANUbHxyUQaIlkPf9F0HUdKM3ng0TvvFIMn9MPybKmL60QLMnzBXRjlAszKvpPWtffU0MYlXKYrgdw5SejqIFCNHE4Fm1iDEdo3Brx8WihmyzysKVeuytAxh0Z+GJ5ZiFq2TQO3xoiRd8MM0nwcdvnvgWEZnFjVibLJpeEr1zcglsHVCCSQuYeCoJdWFNeeNx49u++HMk5fYWa+ZHcmIiAMJagU0VavGeJyOw4YVI5MhFdNvszd6egZUGPr0QOMUJQiLn2AKqfLtB3oSQkk2L1m6j0ndvMFqEVY5pgBUWrP7h0rg+iIvhcnEQrD9oHZw2aYet+v3EVVzTfWmlCt81XSb+MXU7iiZFhhTczjIqcaRUVJMrIe9/qs4t3gFLKwilsx8KtOwrzVqnbyIlPuAZcbIMZM8DkMVOkrbfnWsIDR3D9Shn9oi5OFUXhOpTiSM0iY3dpCn+86DIlecU/aA6MBHVKCzFZzjXaXYnhwo0U0/xBs9ynfXjdRMPEZDZOAgLRvZIoOSDtCJPThNllMTK3isLALzSvd7aqX/MFvCYM/UdcSjrudlYrt7ArNN0TcnFZOd9PpWNieCRS+U/+lTMg2jEn0Sy1ln6GZDTqrXcoz3i9Q44rNC4WJKiQf7p/maoOzzEjBVzo=
   file: 
     - KNOSSOS.app.zip
-    - KNOSSOS.appimage
     
   skip_cleanup: true
   overwrite: true
