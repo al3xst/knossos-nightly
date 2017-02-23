@@ -1,6 +1,6 @@
 env:
   global:
-    - TRAVIS_TAG=nighlty
+    - TRAVIS_TAG=nightly
 
 language: cpp
 matrix:
