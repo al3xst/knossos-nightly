@@ -34,7 +34,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then /usr/local/Cellar/qt5/${OSXQT}/bin/macdeployqt KNOSSOS.app; fi
   #run macdeployqtfix
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then KPATH=`pwd`; python macdeployqtfix.py /usr/local/Cellar/qt5/${OSXQT}/ ${pwd}/KNOSSOS.app; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then KPATH=`pwd`; sudo python macdeployqtfix.py /usr/local/Cellar/qt5/${OSXQT}/ ${pwd}/KNOSSOS.app; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then zip -r KNOSSOS.app.zip KNOSSOS.app; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ls -al .; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cp KNOSSOS.app.zip ../..; fi
