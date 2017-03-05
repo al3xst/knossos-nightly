@@ -23,7 +23,6 @@ before_install:
   
 before_script: 
 #OSX
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget https://github.com/al3xst/PythonQt/releases/download/nightly-mac/pythonqt.tar.gz; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then tar -xvf pythonqt.tar.gz; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mkdir knossos_build && cd knossos_build; fi
@@ -34,6 +33,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv knossos.app KNOSSOS.app; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then /usr/local/Cellar/qt5/${OSXQT}/bin/macdeployqt KNOSSOS.app; fi
   #run macdeployqtfix
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget https://raw.githubusercontent.com/aurelien-rainone/macdeployqtfix/master/macdeployqtfix.py; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then KPATH=`pwd`; python macdeployqtfix.py /usr/local/Cellar/qt5/${OSXQT}/ ${pwd}/KNOSSOS.app; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then zip -r KNOSSOS.app.zip KNOSSOS.app; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ls -al .; fi
