@@ -18,7 +18,7 @@ git:
 before_install: 
   #OSX
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then RELEASE_PKG_FILE=linux64.KNOSSOS.nightly.AppImage; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then mkdir artifac; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then mkdir artifact; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then git clone https://github.com/knossos-project/knossos.git && cd knossos; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then RELEASE_PKG_FILE=KNOSSOS.app.zip; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
