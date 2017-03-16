@@ -17,10 +17,10 @@ git:
 
 before_install: 
   #OSX
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then RELEASE_PKG_FILE=linux64.KNOSSOS.nightly.AppImage; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export RELEASE_PKG_FILE=linux64.KNOSSOS.nightly.AppImage; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then mkdir artifact; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then git clone https://github.com/knossos-project/knossos.git && cd knossos; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then RELEASE_PKG_FILE=KNOSSOS.app.zip; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export RELEASE_PKG_FILE=KNOSSOS.app.zip; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install qt5 snappy quazip ninja cgal; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export CXXFLAGS="-I/usr/local/opt/qt5/include"; fi #qt5.8.0 is keg-only
@@ -50,6 +50,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then cp artifact/${RELEASE_PKG_FILE} ..; fi
   
 before_deploy:
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo $RELEASE_PKG_FILE; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export RELEASE_PKG_FILE=linux64.KNOSSOS.nightly.AppImage; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export RELEASE_PKG_FILE=KNOSSOS.app.zip; fi
 
