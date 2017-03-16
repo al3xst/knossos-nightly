@@ -47,19 +47,14 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ls -al ../..; fi
   
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run -it --privileged --cap-add=ALL -v /lib/modules:/lib/modules -v /dev:/dev -v ${PWD}/artifact:/root/artifact knossosal3xst/knossos-project-arch /bin/bash -c 'cd /root/; ./build_and_pack.sh'; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then cp artifact/${RELEASE_PKG_FILE} ..; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then cp artifact/${RELEASE_PKG_FILE} .; fi
   
-before_deploy:
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then ls -al; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export RELEASE_PKG_FILE=linux64.KNOSSOS.nightly.AppImage; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export RELEASE_PKG_FILE=KNOSSOS.app.zip; fi
-
 deploy:
   provider: releases
   api_key:
     secure: 35guXMCYs1UKXHNia+0aLITTDdCtXjclYYANUbHxyUQaIlkPf9F0HUdKM3ng0TvvFIMn9MPybKmL60QLMnzBXRjlAszKvpPWtffU0MYlXKYrgdw5SejqIFCNHE4Fm1iDEdo3Brx8WihmyzysKVeuytAxh0Z+GJ5ZiFq2TQO3xoiRd8MM0nwcdvnvgWEZnFjVibLJpeEr1zcglsHVCCSQuYeCoJdWFNeeNx49u++HMk5fYWa+ZHcmIiAMJagU0VavGeJyOw4YVI5MhFdNvszd6egZUGPr0QOMUJQiLn2AKqfLtB3oSQkk2L1m6j0ndvMFqEVY5pgBUWrP7h0rg+iIvhcnEQrD9oHZw2aYet+v3EVVzTfWmlCt81XSb+MXU7iiZFhhTczjIqcaRUVJMrIe9/qs4t3gFLKwilsx8KtOwrzVqnbyIlPuAZcbIMZM8DkMVOkrbfnWsIDR3D9Shn9oi5OFUXhOpTiSM0iY3dpCn+86DIlecU/aA6MBHVKCzFZzjXaXYnhwo0U0/xBs9ynfXjdRMPEZDZOAgLRvZIoOSDtCJPThNllMTK3isLALzSvd7aqX/MFvCYM/UdcSjrudlYrt7ArNN0TcnFZOd9PpWNieCRS+U/+lTMg2jEn0Sy1ln6GZDTqrXcoz3i9Q44rNC4WJKiQf7p/maoOzzEjBVzo=
   file_glob: true
-  file: linux64.KNOSSOS.nightly.AppImage
+  file: ${RELEASE_PKG_FILE}
     
   skip_cleanup: true
   overwrite: true
