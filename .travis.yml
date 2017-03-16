@@ -50,7 +50,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then cp artifact/${RELEASE_PKG_FILE} ..; fi
   
 before_deploy:
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then echo $RELEASE_PKG_FILE; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then ls -al; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export RELEASE_PKG_FILE=linux64.KNOSSOS.nightly.AppImage; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export RELEASE_PKG_FILE=KNOSSOS.app.zip; fi
 
